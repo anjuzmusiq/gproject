@@ -1,0 +1,58 @@
+html>
+<body>
+<form method='POST'>
+Enter Department id:
+<input type='text' name='did'><br>
+Enter Department name:
+<input type='text' name='dname'><br>
+<input type='submit' name='b1' value='insert'>
+<input type='submit' name='b2' value='update'>
+<input type='submit' name='b3' value='search'>
+<?php
+<table align="center" border="1">
+<tr>
+                              <th>name</th>
+<th>no</th>
+
+</tr>
+<?php
+if(isset($_POST['b1']))
+{
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "flight";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn)
+{
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT name, no FROM mytable2";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0)
+{
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result))
+{
+        echo "Name: " . $row["name"]. "Number: " . $row["no"]. "<br>";
+    }
+}
+else
+{
+    echo "0 results";
+}
+
+mysqli_close($conn);
+}
+?>
+
+</tr>
+</table>
+
+</body>
+</html>
